@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escalas Musicais</title>
+  <style>
+    * {
+      margin: 0rem;
+      padding: 0rem;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+
+    .selected-scale-form {
+      width: max-content;
+      display: flex;
+      flex-direction: column;
+      margin: 1rem auto 0rem auto;
+    }
+
+    .selected-scale-form .row {
+      display: flex;
+    }
+
+    .selected-scale-form label {
+      width: 3rem;
+      display: block;
+      text-align: center;
+    }
+
+    .selected-scale-form input {
+      width: 3rem;
+      height: 3rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .selected-scale-form input {
+      text-transform: uppercase;
+    }
+
+    .correct {
+      border-color: green;
+    }
+
+    .incorrect {
+      border-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Escalas Musicais</h1>
+  <form class="scales-form">
+    <select class="scale-select" name="scales"></select>
+    <select class="scale-note-select" name="scales"></select>
+  </form>
+  <form class="selected-scale-form"></form>
+  <script>
+    let scales = [];
+    let major = {
+      name: "Maior",
+      notes: []
+    };
+    let minor = {
+      name: "Menor",
+      notes: []
+    };
+    let allNotes = [["C"], ["C#"], ["D"], ["D#"], ["E"], ["F"], ["F#"], ["G"], ["G#"], ["A"], ["A#"], ["B"]];
+
+    let c = {
+      notes: [allNotes[0], allNotes[2], allNotes[4], allNotes[5], allNotes[7], allNotes[9], allNotes[11], allNotes[0]]
+    }
+
+    let d = {
+      notes: [allNotes[2], allNotes[4], allNotes[6], allNotes[7], allNotes[9], allNotes[11], allNotes[1], allNotes[2]]
+    }
+
+    let e = {
+      notes: [allNotes[4], allNotes[6], allNotes[8], allNotes[9], allNotes[11], allNotes[1], allNotes[3], allNotes[4]]
+    }
+
+    let f = {
+      notes: [allNotes[5], allNotes[7], allNotes[9], allNotes[10], allNotes[0], allNotes[2], allNotes[4], allNotes[5]]
+    }
+
+    let g = {
+      notes: [allNotes[7], allNotes[9], allNotes[11], allNotes[0], allNotes[2], allNotes[4], allNotes[6], allNotes[7]]
+    }
+
+    let a = {
+      notes: [allNotes[9], allNotes[11], allNotes[1], allNotes[2], allNotes[4], allNotes[6], allNotes[8], allNotes[9]]
+    }
+
+    let b = {
+      notes: [allNotes[11], allNotes[1], allNotes[3], allNotes[4], allNotes[6], allNotes[8], allNotes[10], allNotes[11]]
+    }
+
+    scales.push(major);
+
+    let $scalesForm = document.querySelector(".scales-form");
+    let $scaleSelect = $scalesForm.querySelector(".scale-select");
+    let $scaleNoteSelect = $scalesForm.querySelector(".scale-note-select");
+    let $selectedScaleForm = document.querySelector(".selected-scale-form");
+    let selectedScale = 0;
+    let selectedScaleNote = 0;
+
+    function loadScales() {
+      let listOfInputs = [];
+
+      scales[0].notes = [];
+
+      if (selectedScaleNote == 0) {
+        scales[0].notes.push(c);
+        scales[0].notes.push(d);
+        scales[0].notes.push(e);
+        scales[0].notes.push(f);
+        scales[0].notes.push(g);
+        scales[0].notes.push(a);
+        scales[0].notes.push(b);
+      }
+      else if (selectedScaleNote == 1) {
+        scales[0].notes.push(d);
+        scales[0].notes.push(e);
+        scales[0].notes.push(f);
+        scales[0].notes.push(g);
+        scales[0].notes.push(a);
+        scales[0].notes.push(b);
+        scales[0].notes.push(c);
+      }
+      else if (selectedScaleNote == 2) {
+        scales[0].notes.push(e);
+        scales[0].notes.push(f);
+        scales[0].notes.push(g);
+        scales[0].notes.push(a);
+        scales[0].notes.push(b);
+        scales[0].notes.push(c);
+        scales[0].notes.push(d);
+      }
+      else if (selectedScaleNote == 3) {
+        scales[0].notes.push(f);
+        scales[0].notes.push(g);
+        scales[0].notes.push(a);
+        scales[0].notes.push(b);
+        scales[0].notes.push(c);
+        scales[0].notes.push(d);
+        scales[0].notes.push(e);
+      }
+      else if (selectedScaleNote == 4) {
+        scales[0].notes.push(g);
+        scales[0].notes.push(a);
+        scales[0].notes.push(b);
+        scales[0].notes.push(c);
+        scales[0].notes.push(d);
+        scales[0].notes.push(e);
+        scales[0].notes.push(f);
+      }
+      else if (selectedScaleNote == 5) {
+        scales[0].notes.push(a);
+        scales[0].notes.push(b);
+        scales[0].notes.push(c);
+        scales[0].notes.push(d);
+        scales[0].notes.push(e);
+        scales[0].notes.push(f);
+        scales[0].notes.push(g);
+      }
+      else if (selectedScaleNote == 6) {
+        scales[0].notes.push(b);
+        scales[0].notes.push(c);
+        scales[0].notes.push(d);
+        scales[0].notes.push(e);
+        scales[0].notes.push(f);
+        scales[0].notes.push(g);
+        scales[0].notes.push(a);
+      }
+
+      scales.forEach((scale, scaleIndex) => {
+        $scaleSelect.innerHTML = "";
+
+        $scaleSelect.insertAdjacentHTML("beforeend", `<option value="${scaleIndex}">${scale.name}</option>`);
+
+        $selectedScaleForm.innerHTML = "";
+
+        (scale.notes).forEach((scaleNote, scaleNoteIndex) => {
+          if ($scaleNoteSelect.childElementCount <= 7) {
+            $scaleNoteSelect.insertAdjacentHTML("beforeend", `<option value="${scaleNoteIndex}">${scaleNote.notes[0]}</option>`);
+          }
+
+          (scaleNote.notes).forEach((note, noteIndex) => {
+            if (noteIndex == 0 || noteIndex == 2 || noteIndex == 4) {
+              if (noteIndex == 0) {
+                listOfInputs.push(`<div class="note"><label>${noteIndex + 1}</label><input disabled value="${note[0]}"/></div>`);
+              }
+              else {
+                listOfInputs.push(`<div class="note"><label>${noteIndex + 1}</label><input data-value="${note[0]}"/></div>`);
+              }
+            }
+          });
+
+          $selectedScaleForm.insertAdjacentHTML("beforeend", `<div class="row">${listOfInputs}</div>`);
+
+          listOfInputs = [];
+        });
+      });
+    }
+
+    loadScales();
+
+    $scaleSelect.addEventListener("change", event => {
+      selectedScale = event.target.value;
+    });
+
+    $scaleNoteSelect.addEventListener("change", event => {
+      selectedScaleNote = event.target.value;
+
+      loadScales();
+    });
+
+    $selectedScaleForm.addEventListener("change", event => {
+      if ((event.target.value).toUpperCase() == (event.target).getAttribute("data-value")) {
+        (event.target).classList.add("correct");
+        (event.target).classList.remove("incorrect");
+      }
+      else {
+        (event.target).classList.add("incorrect");
+        (event.target).classList.remove("correct");
+      }
+    });
+  </script>
+</body>
+
+</html>
